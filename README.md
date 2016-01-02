@@ -1,5 +1,5 @@
 # janus-shuffle
-Janus-Shuffle applies **davidbau**'s ``seedrandom`` to power the randomness requirement of **coolaj86**'s ``knuth-shuffle``, allowing a user to shuffle strings based on string-based seeds.  This library will work in NodeJS and on the browser. 
+Janus-Shuffle applies **davidbau**'s ``seedrandom`` to power the randomness requirement of **coolaj86**'s ``knuth-shuffle``, allowing a user to shuffle strings based on string-based seeds.  Before shuffling, character occurernces are evenly applied to the string to guard against weight analysis. This library will work in NodeJS and on the browser. 
 
 ## Installation
 

@@ -281,14 +281,46 @@
   }
 
   /**
-   *
+   * Distributed each letter an equal amount of times to through the string to eliminate weighting and then shuffles it.
+   * @param   str   String    String to shuffle
+   * @param   key   String    String to seed the shuffling with
+   * @return        String    Shuffled string
    */
   function shuffle(str, key)  {
+      // Count character occurrence
+      var charCount = {
+        '|': 0
+      };
+      var maxChar = 0;
+      for(var i = 0, len = str.length; i<len; i++) {
+        if(charCount[str[i]] === undefined) {
+          charCount[str[i]] = 1;
+        } else {
+          charCount[str[i]] += 1;
+        }
+        if(charCount[str[i]] > maxChar) {
+          maxChar = charCount[str[i]];
+        }
+      }
+
+      // Generate string of extra characters for even distribution
+      var tail = '';
+      for(i in charCount) {
+        if(charCount.hasOwnProperty(i)) {
+          for(var j = maxChar - charCount[i]; j > 0; j--) {
+            tail += i;
+          }
+        }
+      }
+
+      // Added it to the end of the original string
+      str += tail;
+
       var size = str.length;
       var chars = new Array(size - 1);
       var exchanges = getShuffleExchanges(size, key);
       var n, tmp;
-      for (var i = size - 1; i >= 0; i--)  {
+      for (i = size - 1; i >= 0; i--)  {
           n = exchanges[i];
           chars[i] = str[n];
       }
@@ -296,7 +328,7 @@
   }
 
   /**
-   *a
+   * 
    */
   function deshuffle(str, key) {
       var size = str.length;
@@ -307,7 +339,8 @@
           n = exchanges[i];
           chars[n] = str[i];
       }
-      return chars.join('');
+      var result = chars.join('');
+      return result.substr(0, result.indexOf('|'));
   }
 
   exports.shuffle = shuffle;
