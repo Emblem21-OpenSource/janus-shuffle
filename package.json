@@ -1,6 +1,6 @@
 {
   "name": "janus-shuffle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Performs Fisher-Yates shuffling with a seedable random number generator.",
   "main": "index.js",
   "dependencies": {},
