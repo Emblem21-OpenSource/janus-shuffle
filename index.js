@@ -288,9 +288,7 @@
    */
   function shuffle(str, key)  {
       // Count character occurrence
-      var charCount = {
-        '|': 0
-      };
+      var charCount = {};
       var maxChar = 0;
       for(var i = 0, len = str.length; i<len; i++) {
         if(charCount[str[i]] === undefined) {
@@ -302,9 +300,13 @@
           maxChar = charCount[str[i]];
         }
       }
+      var tail = '';
+      for(i = 0, len = maxChar; i<len; i++) {
+        tail += '|';
+      }
 
       // Generate string of extra characters for even distribution
-      var tail = '';
+      
       for(i in charCount) {
         if(charCount.hasOwnProperty(i)) {
           for(var j = maxChar - charCount[i]; j > 0; j--) {
@@ -315,7 +317,6 @@
 
       // Added it to the end of the original string
       str += tail;
-
       var size = str.length;
       var chars = new Array(size - 1);
       var exchanges = getShuffleExchanges(size, key);
@@ -324,6 +325,7 @@
           n = exchanges[i];
           chars[i] = str[n];
       }
+
       return chars.join('');
   }
 
